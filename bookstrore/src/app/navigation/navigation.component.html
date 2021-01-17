@@ -4,7 +4,7 @@
 
       <!-- Brand -->
       <a class="navbar-brand waves-effect">
-        <strong class="blue-text">MINI STORE</strong>
+        <strong class="blue-text">MINI SHOP</strong>
       </a>
 
       <!-- Collapse -->
@@ -21,22 +21,25 @@
          
          <!---MENU IS HERE --> 
           <li class="nav-item " *ngFor="let category of categories">
-            <a class="nav-link waves-effect" routerLink="product-category/{{category.id}}/products" >
+            <a class="nav-link waves-effect" routerLink="category/{{category.id}}" >
               {{category.categoryName}}
-			  </a>
-         </li>
-         <li class="nav-item">
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
-        
-         </li>
+			      </a>
+        </li>
+        <li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li class="nav-item">
+          <div class="md-form my-0">
+            <input #myInput class="form-control mr-sm-2" 
+                            type="text" placeholder="Product Search" 
+                            aria-label="Search"
+                            (keyup.enter)="doSearch(myInput.value)"/>
+          </div>
+        </li>
+       
         </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
+          
           <li class="nav-item">
             <a class="nav-link waves-effect">
               <span class="badge red z-depth-1 mr-1"> 1 </span>

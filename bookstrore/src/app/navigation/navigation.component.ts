@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCategory } from '../common/product-category';
 import { CategoryService } from '../service/category.service';
 
@@ -11,7 +11,7 @@ import { CategoryService } from '../service/category.service';
 export class NavigationComponent implements OnInit {
 
   categories:ProductCategory[] = [];
-  constructor(private service:CategoryService, private route:ActivatedRoute) { }
+  constructor(private service:CategoryService, private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -21,5 +21,9 @@ export class NavigationComponent implements OnInit {
     this.service.getCategoryList().subscribe(data=>{
       this.categories= data;
     });
+  }
+  doSearch(keyword:string){
+    console.log(`search/${keyword}`);
+    this.router.navigateByUrl(`search/${keyword}`);
   }
 }

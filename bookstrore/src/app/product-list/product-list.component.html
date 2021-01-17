@@ -15,7 +15,7 @@
           <div class="view overlay">
             <img src="{{tempProduct.imageUrl}}" class="card-img-top"
               alt="">
-            <a>
+            <a routerLink="/products/{{tempProduct.id}}">
               <div class="mask rgba-white-slight"></div>
             </a>
           </div>
@@ -24,11 +24,11 @@
           <!--Card content-->
           <div class="card-body text-center">
             <!--Category & Title-->
-            <a href="" class="grey-text">
+            <a routerLink="/products/{{tempProduct.id}}" class="grey-text">
               <!--<h5>{{tempProduct.description}}</h5>-->
             </a>
               <strong>
-                <a href="" class="dark-grey-text">{{tempProduct.name}}
+                <a routerLink="/products/{{tempProduct.id}}" class="dark-grey-text">{{tempProduct.name}}
                   <!---<span class="badge badge-pill danger-color">NEW</span>-->
                 </a>
               </strong>
@@ -45,6 +45,10 @@
 
       </div>
       <!--Grid column-->
+      <!---IF PRODUCT NOT FOUND THEN PRINT MESSAGE-->
+      <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
+        <h1>No Product Found</h1>
+      </div>
 
     </div>
     <!--Grid row-->

@@ -9,13 +9,15 @@ import { SubcategoryMenuComponent } from './subcategory-menu/subcategory-menu.co
 import {HttpClientModule} from '@angular/common/http'
 import { ProductService } from './service/product.service';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @NgModule({
   declarations: [
     AppComponent,
     SliderComponent,
     ProductListComponent,
     SubcategoryMenuComponent,
-    NavigationComponent
+    NavigationComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,

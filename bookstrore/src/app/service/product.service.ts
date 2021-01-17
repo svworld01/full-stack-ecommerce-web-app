@@ -14,10 +14,27 @@ export class ProductService {
 
   }
 
+  getProduct(productID:number):Observable<Product>{
+    const productUrl:string = `${this.url}/${productID}`;
+    return this.httpClient.get<Product>(productUrl);
+  }
+  
+  private getProducts(searchURL: string): Observable<Product[]> {
+    return this.httpClient.get<Product[]>(searchURL).pipe(map(result => result));
+  }
+
+
   getProductList(categoryID:number):Observable<Product[]>{
     const searchURL = `http://localhost:8080/product-category/${categoryID}/products`;
     console.log(searchURL);
-    return this.httpClient.get<Product[]>(searchURL).pipe(map(result=>result));
+    return this.getProducts(searchURL);
+  }
+  
+
+  searchProducts(keyword:string):Observable<Product[]>{
+    const searchURL = `http://localhost:8080/search/${keyword}`;
+    console.log(searchURL);
+    return this.getProducts(searchURL);
   }
 
 }
