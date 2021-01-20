@@ -10,6 +10,8 @@ import {HttpClientModule} from '@angular/common/http'
 import { ProductService } from './service/product.service';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './cart-status/cart-status.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +19,14 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     ProductListComponent,
     SubcategoryMenuComponent,
     NavigationComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    CartStatusComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

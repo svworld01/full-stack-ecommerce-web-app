@@ -1,97 +1,81 @@
-
 <!--Section: Products v.3-->
 <section class="text-center mb-4">
-
-    <!--Grid row-->
-    <div class="row wow fadeIn">
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4" *ngFor="let tempProduct of products">
-
-        <!--Card-->
-        <div class="card">
-
-          <!--Card image-->
-          <div class="view overlay">
-            <img src="{{tempProduct.imageUrl}}" class="card-img-top"
-              alt="">
-            <a routerLink="/products/{{tempProduct.id}}">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <!--Card image-->
-
-          <!--Card content-->
-          <div class="card-body text-center">
-            <!--Category & Title-->
-            <a routerLink="/products/{{tempProduct.id}}" class="grey-text">
-              <!--<h5>{{tempProduct.description}}</h5>-->
-            </a>
-              <strong>
-                <a routerLink="/products/{{tempProduct.id}}" class="dark-grey-text">{{tempProduct.name}}
-                  <!---<span class="badge badge-pill danger-color">NEW</span>-->
-                </a>
-              </strong>
-
-            <h4 class="font-weight-bold blue-text">
-              <strong>{{tempProduct.unitPrice}}$</strong>
-            </h4>
-
-          </div>
-          <!--Card content-->
-
+  <!--Grid row-->
+  <div class="row wow fadeIn">
+    <!--Grid column-->
+    <div class="col-lg-3 col-md-6 mb-4" *ngFor="let tempProduct of products">
+      <!--Card-->
+      <div class="card">
+        <!--Card image-->
+        <div class="view overlay">
+          <img src="{{ tempProduct.imageUrl }}" class="card-img-top" alt="" />
+          <a routerLink="/products/{{ tempProduct.id }}">
+            <div class="mask rgba-white-slight"></div>
+          </a>
         </div>
-        <!--Card-->
+        <!--Card image-->
 
-      </div>
-      <!--Grid column-->
-      <!---IF PRODUCT NOT FOUND THEN PRINT MESSAGE-->
-      <div *ngIf="products?.length == 0" class="alert alert-warning col-md-12" role="alert">
-        <h1>No Product Found</h1>
-      </div>
+        <!--Card content-->
+        <div class="card-body text-center">
+          <!--Category & Title-->
+          <a routerLink="/products/{{ tempProduct.id }}" class="grey-text">
+            <!--<h5>{{tempProduct.description}}</h5>-->
+          </a>
+          <strong>
+            <a
+              routerLink="/products/{{ tempProduct.id }}"
+              class="dark-grey-text"
+              >{{ tempProduct.name }}
+              <!---<span class="badge badge-pill danger-color">NEW</span>-->
+            </a>
+          </strong>
 
+          <h4 class="font-weight-bold blue-text">
+            <strong>{{ tempProduct.unitPrice }}$</strong>
+          </h4>
+          <button (click)="addProductToCart(tempProduct)" class="btn btn-lg btn-primary">Add to Cart</button>
+        </div>
+        <!--Card content-->
+      </div>
+      <!--Card-->
     </div>
-    <!--Grid row-->
+    <!--Grid column-->
+    <!---IF PRODUCT NOT FOUND THEN PRINT MESSAGE-->
+    <div
+      *ngIf="products?.length == 0"
+      class="alert alert-warning col-md-12"
+      role="alert"
+    >
+      <h1>No Product Found</h1>
+    </div>
+  </div>
+  <!--Grid row-->
+</section>
+<!--Section: Products v.3-->
 
-  </section>
-  <!--Section: Products v.3-->
-
-  <!--Pagination-->
-  <nav class="d-flex justify-content-center wow fadeIn">
-    <ul class="pagination pg-blue">
-
-      <!--Arrow left-->
-      <li class="page-item disabled">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-
-      <li class="page-item active">
-        <a class="page-link" href="#">1
-          <span class="sr-only">(current)</span>
-        </a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">3</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">4</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="#">5</a>
-      </li>
-
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <!--Pagination-->
+<!--Pagination-->
+<div class="">
+  <div class="row">
+    <div class="col-md-9" style="padding-left: 30%">
+      <ngb-pagination
+        [(page)]="thePageNumber"
+        [pageSize]="thePageSize"
+        [collectionSize]="theTotalNumberOfElements"
+        [maxSize] = "3"
+        [boundaryLinks] = "true"
+        (pageChange)="listProducts()"
+      >
+      </ngb-pagination>
+    </div>
+    <div class="col-md-3" style="text-align: right;">
+      <span class="mr-2">Page Size </span>
+      <select #t (change)="updatePageSize(t.value)">
+        <option selected="true">5</option>
+        <option>10</option>
+        <option>15</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+    </div>
+  </div>
+</div>
