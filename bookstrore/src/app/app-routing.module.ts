@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
 
 const routes: Routes = [
+  {path: 'cart-details',  component:CartDetailsComponent},
   {path: 'products',  component:ProductListComponent, pathMatch:'full'},
   {path: 'products/:id',  component:ProductDetailsComponent},
   {path: 'search/:keyword',  component:ProductListComponent},

@@ -11,7 +11,8 @@ import { ProductService } from './service/product.service';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { CartStatusComponent } from './cart-status/cart-status.component'
+import { CartStatusComponent } from './cart-status/cart-status.component';
+import { CartDetailsComponent } from './cart-details/cart-details.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { CartStatusComponent } from './cart-status/cart-status.component'
     SubcategoryMenuComponent,
     NavigationComponent,
     ProductDetailsComponent,
-    CartStatusComponent
+    CartStatusComponent,
+    CartDetailsComponent
   ],
   imports: [
     BrowserModule,

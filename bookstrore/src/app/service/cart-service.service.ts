@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { isTemplateExpression } from 'typescript';
+import { threadId } from 'worker_threads';
 import { CartItem } from '../common/cart-item';
 
 @Injectable({
@@ -47,12 +49,60 @@ export class CartServiceService {
       totalPrice += currentItem.quantity * currentItem.unitPrice;
       totalQuantity += currentItem.quantity;
     }
-    //publish the new values... all subscribers will receive the new data
-    this.totalPrice.next(totalPrice);
-    this.totalQuantity.next(totalQuantity);
-    //log cart data just for debugging
-    this.logCartData(totalPrice, totalQuantity);
+    this.suscribeTotals(totalPrice, totalQuantity);
   }
+  suscribeTotals(totalPrice:number, totalQuantity:number){
+      //publish the new values... all subscribers will receive the new data
+      this.totalPrice.next(totalPrice);
+      this.totalQuantity.next(totalQuantity);
+      //log cart data just ford debugging
+      this.logCartData(totalPrice, totalQuantity);
+  }
+  reduceTotalsWith(price:number, quantity:number){
+    let totalPrice:number = 0;
+    let totalQuantity:number = 0;
+    this.totalPrice.subscribe(data=>totalPrice = data);
+    this.totalPrice.subscribe(data=>totalQuantity = data);
+    this.suscribeTotals(totalPrice - price, totalQuantity - quantity);
+  }
+  //remove item from cart
+  removeItem(cartItem:CartItem){
+    let priceForReduce:number  = cartItem.quantity;
+    let quantityForReduce:number = cartItem.unitPrice*cartItem.quantity;
+    this.reduceTotalsWith(priceForReduce, quantityForReduce);
+    let  index:number = 0;
+    for(let item of this.cartItems){
+      if(item.id === cartItem.id){
+        this.cartItems.splice(index, 1);
+      }
+    }
+   
+  }
+
+  decrementItemQuntity(cartItem:CartItem){
+    let priceForReduce:number  = cartItem.unitPrice;
+    let quantityForReduce:number = 1;
+    if(cartItem.quantity > 1){
+      for(let item of this.cartItems){
+        if(item.id === cartItem.id){
+          item.quantity--;
+          break;
+        }
+      }
+    }
+    this.reduceTotalsWith(priceForReduce, quantityForReduce);
+  }
+
+  incrementItemQuntity(cartItem:CartItem){
+   
+      for(let item of this.cartItems){
+        if(item.id == cartItem.id){
+          item.quantity++;
+        }
+      }
+   
+  }
+
   //logging data
   logCartData(totalPrice: number, totalQuantity: number) {
     console.log("Contents of Cart:");
