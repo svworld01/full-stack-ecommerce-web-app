@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { isTemplateExpression } from 'typescript';
-import { threadId } from 'worker_threads';
 import { CartItem } from '../common/cart-item';
 
 @Injectable({
